@@ -25,16 +25,22 @@ function WeatherMain() {
     const currentDate = new Date();
     const formattedDate = currentDate.toString().substr(4, 6);
     const time = currentDate.toLocaleTimeString('en-US');
-    const formattedTime = time.substr(0, 4) + ' ' + time.substr(8, 2);
+
+    let formattedTime;
+    if (time.length > 10) {
+      formattedTime = time.substr(0, 5) + ' ' + time.substr(9, 2);
+    } else {
+      formattedTime = time.substr(0, 4) + ' ' + time.substr(8, 2);
+    }
 
     setWeatherData(
-      {city: currentData.name,
+      {location: `${currentData.name}, ${currentData.sys.country}`,
        date: formattedDate,
        time: formattedTime,
        currentTemp: currentData.main.temp,
        high: hourlyDailyData.daily[0].temp.max,
        low: hourlyDailyData.daily[0].temp.min,
-       currentDesc: hourlyDailyData.current.weather[0].main,
+       currentDesc: hourlyDailyData.current.weather[0].description,
        currentIcon: hourlyDailyData.current.weather[0].icon}
     );
   }
@@ -43,14 +49,20 @@ function WeatherMain() {
     if (weatherData) {
       return (
         <>
-          <h1>{`${weatherData.date}, ${weatherData.time}`}</h1>
-          <h2>{weatherData.city}</h2>
-          <p>{`${Math.round(weatherData.currentTemp)}°F`}</p>
-          <p>{`H: ${Math.round(weatherData.high)} L: ${Math.round(weatherData.low)}`}</p>
-          <p>
-            {`${weatherData.currentDesc}`}
-            <img src={`${weatherData.currentIcon}.png`} alt="" />
-          </p>
+          <div className='current-stats'>
+            <h1>{`${weatherData.date}, ${weatherData.time}`}</h1>
+            <h2>{weatherData.location}</h2>
+            <p className='current-temp'>{`${Math.round(weatherData.currentTemp)}°F`}</p>
+            <div className='current-weather-con'>
+              <p>{`${weatherData.currentDesc}`}</p>
+              <img src={`${weatherData.currentIcon}.png`} alt="image of weather condition"/>
+            </div>
+            <div className='current-high-low'>
+              <p>{`H: ${Math.round(weatherData.high)}°`}</p>
+              <p>{`L: ${Math.round(weatherData.low)}°`}</p>
+            </div>
+            <p></p>
+          </div>
         </>
       )
     }

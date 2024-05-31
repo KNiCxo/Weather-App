@@ -1,0 +1,81 @@
+
+/* Oswald Regular font */
+@font-face {
+  src: url(fonts/Oswald/static/Oswald-Regular.ttf);
+  font-family: oswald-regular;
+}
+
+body {
+  background-image: url("sky.jpg");
+  background-size: 1500px;
+  background-position-x: 800px;
+  background-position-y: 1000px;
+  color: white;
+}
+
+.current-stats {
+  text-align: center;
+  margin-top: 40px;
+  font-family: oswald-regular;
+  text-shadow: 3px 3px 2px black;
+}
+
+.current-stats h1 {
+  font-size: 25px;
+  margin-bottom: 0;
+}
+
+.current-stats h2 {
+  margin: 0px;
+  font-size: 35px;
+}
+
+.current-temp {
+  font-size: 80px;
+  margin: 15px auto 15px;
+  width: 200px;
+  height: 120px;
+  border-radius: 20px;
+  background-color: rgba(223, 216, 216, 0.70);
+}
+
+.current-weather-con {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(223, 216, 216, 0.70);
+  width: 230px;
+  height: 45px;
+  border-radius: 10px;
+}
+
+.current-weather-con p{
+  font-size: 25px;
+  text-transform: capitalize;
+}
+
+.current-weather-con img {
+  width: 65px;
+  height: 65px;
+  position: relative;
+  top: 2px;
+}
+
+.current-high-low {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 25px;
+}
+
+.current-high-low p:first-child{
+  margin-right: 20px;
+}
+
+.current-high-low p {
+  background-color: rgba(223, 216, 216, 0.70);
+  width: 75px;
+  border-radius: 10px;
+}
