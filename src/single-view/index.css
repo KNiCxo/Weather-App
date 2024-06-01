@@ -31,13 +31,31 @@ body {
 /* Styling for current date and time */
 .current-stats h1 {
   font-size: 20px;
-  margin-bottom: 0;
+  margin-bottom: 5px;
 }
 
 /* Styling for location */
 .current-stats h2 {
   margin: 0 0 20px;
   font-size: 30px;
+}
+
+.menu {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  top: 4px;
+}
+
+.menu:hover {
+  background-color: var(--box);
+  border-radius: 3px;
+}
+
+.menu img{
+  width: 30px;
+  height: 30px;
 }
 
 /* Styling for current temperature data */
