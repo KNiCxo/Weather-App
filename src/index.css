@@ -10,30 +10,31 @@ body {
   background-size: 1500px;
   background-position-x: 800px;
   background-position-y: 1000px;
+  font-family: oswald-regular;
   color: white;
 }
 
 .current-stats {
   text-align: center;
-  margin-top: 40px;
-  font-family: oswald-regular;
+  margin-top: 30px;
+  margin-bottom: -10px;
   text-shadow: 3px 3px 2px black;
 }
 
 .current-stats h1 {
-  font-size: 25px;
+  font-size: 20px;
   margin-bottom: 0;
 }
 
 .current-stats h2 {
-  margin: 0px;
-  font-size: 35px;
+  margin: 0 0 20px;
+  font-size: 30px;
 }
 
 .current-temp {
   font-size: 80px;
   margin: 15px auto 15px;
-  width: 200px;
+  width: 180px;
   height: 120px;
   border-radius: 20px;
   background-color: rgba(223, 216, 216, 0.70);
@@ -78,4 +79,38 @@ body {
   background-color: rgba(223, 216, 216, 0.70);
   width: 75px;
   border-radius: 10px;
+}
+
+.summary {
+  text-align: center;
+  font-size: 18px;
+  width: 90%;
+  margin: 0 auto 20px;
+}
+
+
+.twenty-four-hour {
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+  white-space: nowrap;
+  background-color: rgba(223, 216, 216, 0.6);
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.hourly-data {
+  text-align: center;
+  padding: 10px;
+}
+
+.hourly-data p {
+  margin: 0px;
+  font-size: 17px;
+}
+
+.hourly-data img {
+  width: 35px;
+  height: 35px;
 }
