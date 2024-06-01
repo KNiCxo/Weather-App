@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 
-// Creates Current, 24-Hour, and 8-Day Forecasts
+// Creates Current, 24-Hour, and 7-Day Forecasts
 function WeatherMain() {
   // Stores data necessary for forecasts from OpenWeatherMap API as an array of objects
   const [weatherData, setWeatherData] = useState([]);
@@ -27,7 +27,7 @@ function WeatherMain() {
 
   // Parases data from API calls into weatherData array
   function organizeData(currentData, hourlyDailyData) {
-    // Parses the current local time from a Date object
+    // Formats the date and parses the time into an individual variable
     const currentDate = new Date();
     const formattedDate = currentDate.toString().substr(4, 6);
     const time = currentDate.toLocaleTimeString('en-US');
@@ -42,6 +42,10 @@ function WeatherMain() {
       formattedTime = time.substr(0, 4) + ' ' + time.substr(8, 2);
     }
 
+    // Parses the hour and meridiem from formattedTime into seperate variables
+    let currentHour = formattedTime.length > 7 ? Number(formattedTime.substr(0, 2)) : Number(formattedTime.substr(0, 1));
+    let currentMeridiem = formattedTime.length > 7 ? formattedTime.substr(6, 2) : formattedTime.substr(5, 2); 
+
     // Stores current forecast data in first index of array
     setWeatherData([{
       location: `${currentData.name}, ${currentData.sys.country}`,
@@ -55,19 +59,15 @@ function WeatherMain() {
       summary: hourlyDailyData.daily[0].summary
      }
     ]);
-    
-    // Parses the hour and meridiem from formattedTime into seperate variables
-    let currentHour = formattedTime.length > 7 ? Number(formattedTime.substr(0, 2)) : Number(formattedTime.substr(0, 1));
-    let currentMeridiem = formattedTime.length > 7 ? formattedTime.substr(6, 2) : formattedTime.substr(5, 2); 
 
     // Stores the first hourly forecast data into the next index of array
-    const firstStat = {
+    const firstHourly = {
       time: 'Now',
       meridiem: '',
       icon: hourlyDailyData.hourly[0].weather[0].icon,
       temp: hourlyDailyData.hourly[0].temp
     }
-    setWeatherData(w => [...w, firstStat]);
+    setWeatherData(w => [...w, firstHourly]);
 
     // Increments the hour and changes the meridiem (if needed) for next hourly forecast dataset
     if (currentHour === 12) {
@@ -104,8 +104,36 @@ function WeatherMain() {
           }
         }
       }
-
       setWeatherData(w => [...w, hourlyStat]);
+    }
+
+    // Stores the first daily forecast data into the next index of array
+    const firstDaily = {
+      day: 'Today',
+      icon: hourlyDailyData.daily[0].weather[0].icon,
+      high: hourlyDailyData.daily[0].temp.max,
+      low: hourlyDailyData.daily[0].temp.min
+    }
+    setWeatherData(w => [...w, firstDaily]);
+
+     // Creates 7 day forecast dataset and stores into array
+     for (let i = 1; i <= 7; i++) {
+      // Increments to the following day
+      const date = currentDate.setDate(currentDate.getDate() + 1);
+
+      // Gets the day name from the date
+      const day = currentDate.toLocaleDateString('en-US', { weekday: 'long' });
+
+      // Formats day into the first three letters
+      const formattedDay = day.substr(0, 3);
+
+      const dailyStat = {
+        day: formattedDay,
+        icon: hourlyDailyData.daily[i].weather[0].icon,
+        high: hourlyDailyData.daily[i].temp.max,
+        low: hourlyDailyData.daily[i].temp.min
+      }
+      setWeatherData(w => [...w, dailyStat]);
     }
 
   }
@@ -138,21 +166,42 @@ function WeatherMain() {
             </div>
           </div>
 
-          {/* Displays daily weather summary */}
-          <p className='summary'>{`${weatherData[0].summary}.`}</p>
-
-          {/* Displays 24 hour forecast */}
+          {/* Displays daily weather summary and 24 hour forecast */}
           <div className='twenty-four-hour'>
-            {/* Loops through the indexes that relate to the 24 hour forecast */}
-            {weatherData.slice(1, 26).map((data, index) => (
-              // Displays individual hourly data
-              <div className='hourly-data' key={index}>
-                {/* Displays the hour and the weather condition and temperature associated with it */}
-                <p>{`${data.time}${data.meridiem}`}</p>
-                <img src={`${data.icon}.png`} alt=""/>
-                <p>{`${Math.round(data.temp)}°`}</p>
-              </div>
-            ))}
+            {/* Displays daily weather summary */}
+            <div class='summary-section'>
+              <p>{`${weatherData[0].summary}.`}</p>
+            </div>
+
+            <div className='hourly-section'>
+              {/* Loops through the indexes that relate to the 24 hour forecast */}
+              {weatherData.slice(1, 26).map((data, index) => (
+                // Displays individual hourly data
+                <div className='hourly-data' key={index}>
+                  {/* Displays the hour along with the weather condition and temperature associated with it */}
+                  <p>{`${data.time}${data.meridiem}`}</p>
+                  <img src={`${data.icon}.png`} alt=""/>
+                  <p>{`${Math.round(data.temp)}°`}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Displays 7 day forecast */}
+          <div className='seven-day'>
+              {/* Loops through the indexes that relate to the 7 day forecast */}
+              {weatherData.slice(26, 33).map((data, index) => (
+                // Displays individual daily data
+                <div className='daily-data' key={index}>
+                  {/* Displays the day along with the weather condition and high/low associated with it */}
+                  <p>{`${data.day}`}</p>
+                  <img src={`${data.icon}.png`} alt=""/>
+                  <div className='daily-high-low'>
+                    <p>{`H: ${Math.round(data.high)}°`}</p>
+                    <p>{`L: ${Math.round(data.low)}°`}</p>
+                  </div>
+                </div>
+              ))}
           </div>
         </>
       )

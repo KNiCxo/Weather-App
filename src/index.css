@@ -1,3 +1,7 @@
+:root {
+  --box: rgba(123, 176, 226, 0.704);
+  --boxBorder: rgba(163, 208, 218, 0.821);
+}
 
 /* Oswald Regular font */
 @font-face {
@@ -11,6 +15,7 @@ body {
   background-size: 1500px;
   background-position-x: 800px;
   background-position-y: 1000px;
+  background-attachment: fixed;
   font-family: oswald-regular;
   color: white;
 }
@@ -39,10 +44,11 @@ body {
 .current-temp {
   font-size: 80px;
   margin: 15px auto 15px;
-  width: 180px;
-  height: 120px;
+  width: 200px;
+  height: 110px;
   border-radius: 20px;
-  background-color: rgba(223, 216, 216, 0.70);
+  background-color: var(--box);
+  line-height: 100px;
 }
 
 /* Styling for current weather condition data */
@@ -52,7 +58,7 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: rgba(223, 216, 216, 0.70);
+  background-color: var(--box);
   width: 230px;
   height: 45px;
   border-radius: 10px;
@@ -87,29 +93,36 @@ body {
 
 /* Styling for paragraph element for current high and low temperature data */
 .current-high-low p {
-  background-color: rgba(223, 216, 216, 0.70);
+  background-color: var(--box);
   width: 75px;
   border-radius: 10px;
 }
 
-/* Styling for daily summary */
-.summary {
-  text-align: center;
-  font-size: 18px;
+/* Styling for daily summary and 24 hour forecast box */
+.twenty-four-hour {
+  background-color: var(--box);
   width: 90%;
   margin: 0 auto 20px;
+  border-radius: 10px;
 }
 
-/* Styling for 24 hour forecast box */
-.twenty-four-hour {
+/* Styling for daily summary */
+.summary-section {
+  border-bottom: solid 1px var(--boxBorder);
+  text-align: center;
+  font-size: 16px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Styling for 24 hour forecast */
+.hourly-section {
   display: flex;
   flex-direction: row;
   overflow: auto;
   white-space: nowrap;
-  background-color: rgba(223, 216, 216, 0.6);
-  width: 90%;
-  margin: 0 auto;
-  border-radius: 10px;
 }
 
 /* Styling for individual hour boxes */
@@ -128,4 +141,39 @@ body {
 .hourly-data img {
   width: 35px;
   height: 35px;
+}
+
+/* Styling for 7 day forecast */
+.seven-day {
+  background-color: var(--box);
+  width: 90%;
+  margin: 0 auto 20px;
+  border-radius: 10px;
+}
+
+/* Styling for individual day boxes */
+.daily-data, .daily-high-low {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 30px;
+  padding: 10px;
+  font-size: 20px;
+}
+
+/* Adds a line between each box */
+.daily-data:nth-child(-n + 6) {
+  border-bottom: solid 1px var(--boxBorder);
+}
+
+/* Adjusts daily weather condition image */
+.daily-data img {
+  width: 40px;
+  height: 40px;
+}
+
+/* Creates space between the daily highs/lows */
+.daily-high-low p:first-child{
+  margin-right: 15px;
 }
