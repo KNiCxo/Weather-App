@@ -1,13 +1,17 @@
 import React, {useState, useEffect, useRef} from 'react';
 
+// Creates Current, 24-Hour, and 8-Day Forecasts
 function WeatherMain() {
+  // Stores data necessary for forecasts from OpenWeatherMap API as an array of objects
   const [weatherData, setWeatherData] = useState([]);
 
+  // Fetches data from OpenWeatherMap API on component mount
   useEffect(() => {
     fetchData();
   }, []);
   
 
+  // Makes a call to the "Current Weather Data" and "One Call" APIs, stores the responses, and organizes the data
   const fetchData = async () => {
     const currentResponse = await fetch('https://api.openweathermap.org/data/2.5/weather?lat=32.64&lon=-117.08&appid=6c873417c4c8208022b5eae05b92905a&units=imperial');
 
@@ -21,18 +25,24 @@ function WeatherMain() {
     organizeData(currentJSON, hourlyDailyJSON);
   };
 
+  // Parases data from API calls into weatherData array
   function organizeData(currentData, hourlyDailyData) {
+    // Parses the current local time from a Date object
     const currentDate = new Date();
     const formattedDate = currentDate.toString().substr(4, 6);
     const time = currentDate.toLocaleTimeString('en-US');
 
+    // Formats the time as HH:MM with Meridiem
     let formattedTime;
+
+    // Handles the case difference between one and two digit hours
     if (time.length > 10) {
       formattedTime = time.substr(0, 5) + ' ' + time.substr(9, 2);
     } else {
       formattedTime = time.substr(0, 4) + ' ' + time.substr(8, 2);
     }
 
+    // Stores current forecast data in first index of array
     setWeatherData([{
       location: `${currentData.name}, ${currentData.sys.country}`,
       date: formattedDate,
@@ -46,9 +56,11 @@ function WeatherMain() {
      }
     ]);
     
+    // Parses the hour and meridiem from formattedTime into seperate variables
     let currentHour = formattedTime.length > 7 ? Number(formattedTime.substr(0, 2)) : Number(formattedTime.substr(0, 1));
     let currentMeridiem = formattedTime.length > 7 ? formattedTime.substr(6, 2) : formattedTime.substr(5, 2); 
 
+    // Stores the first hourly forecast data into the next index of array
     const firstStat = {
       time: 'Now',
       meridiem: '',
@@ -57,6 +69,7 @@ function WeatherMain() {
     }
     setWeatherData(w => [...w, firstStat]);
 
+    // Increments the hour and changes the meridiem (if needed) for next hourly forecast dataset
     if (currentHour === 12) {
       currentHour = 1;
     } else {
@@ -70,6 +83,7 @@ function WeatherMain() {
       }
     }
 
+    // Creates 24 hour forecast dataset and stores into array
     for (let i = 1; i <= 24; i++) {
       const hourlyStat = {
         time: currentHour,
@@ -92,35 +106,48 @@ function WeatherMain() {
       }
 
       setWeatherData(w => [...w, hourlyStat]);
-      console.log(hourlyStat);
     }
 
   }
 
+  // Handles displaying current, hourly, and daily forecast data onto the web page
   function showData() {
+    // Only displays data if array is not empty
     if (weatherData.length != 0) {
       return (
         <>
+          {/* Displays current forecast data */}
           <div className='current-stats'>
+            {/* Displays current date and time */}
             <h1>{`${weatherData[0].date}, ${weatherData[0].time}`}</h1>
             <h2>{weatherData[0].location}</h2>
+
+            {/* Displays current temperature */}
             <p className='current-temp'>{`${Math.round(weatherData[0].currentTemp)}°F`}</p>
+
+            {/* Displays current weather condition */}
             <div className='current-weather-con'>
               <p>{`${weatherData[0].currentDesc}`}</p>
               <img src={`${weatherData[0].currentIcon}.png`} alt="image of weather condition"/>
             </div>
+
+            {/* Displays current highs and lows */}
             <div className='current-high-low'>
               <p>{`H: ${Math.round(weatherData[0].high)}°`}</p>
               <p>{`L: ${Math.round(weatherData[0].low)}°`}</p>
             </div>
-            <p></p>
           </div>
 
+          {/* Displays daily weather summary */}
           <p className='summary'>{`${weatherData[0].summary}.`}</p>
 
+          {/* Displays 24 hour forecast */}
           <div className='twenty-four-hour'>
+            {/* Loops through the indexes that relate to the 24 hour forecast */}
             {weatherData.slice(1, 26).map((data, index) => (
+              // Displays individual hourly data
               <div className='hourly-data' key={index}>
+                {/* Displays the hour and the weather condition and temperature associated with it */}
                 <p>{`${data.time}${data.meridiem}`}</p>
                 <img src={`${data.icon}.png`} alt=""/>
                 <p>{`${Math.round(data.temp)}°`}</p>
@@ -134,6 +161,7 @@ function WeatherMain() {
 
   return (
     <>
+      {/* Displays data on to the page */}
       {showData()}
     </>
   );
