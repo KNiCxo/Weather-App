@@ -16,11 +16,9 @@ const fetchData = async () => {
 
 export function changeBackground(dateTime, sunrise, sunset) {
   if (dateTime >= sunrise && dateTime < sunset) {
-    console.log('set to day no local');
     document.body.style.backgroundImage = 'url("sky.jpg")';
     localStorage.setItem('isDay', JSON.stringify('url("sky.jpg")'));
   } else {
-    console.log('set to night no local');
     document.body.style.backgroundImage = 'url("night.jpg")';
     localStorage.setItem('isDay', JSON.stringify('url("night.jpg")'));
   }
