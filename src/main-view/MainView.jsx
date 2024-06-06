@@ -15,9 +15,62 @@ function App() {
   // Stores data necessary for forecasts from OpenWeatherMap API as an array of objects
   const [weatherData, setWeatherData] = useState([]);
 
-  function handleDateTime() {
+   // Makes a call to the "Current Weather Data" and "One Call" APIs, stores the responses, and organizes the data
+   const fetchData = async () => {
+    if (!JSON.parse(localStorage.getItem('selectedLat'))) {
+      const geolocationResponse = await fetch('http://ip-api.com/json/');
+      const geolocationJSON = await geolocationResponse.json();
+      localStorage.setItem('selectedLat', JSON.stringify(geolocationJSON.lat));
+      localStorage.setItem('selectedLon', JSON.stringify(geolocationJSON.lon));
+    }
+
+    const lat = JSON.parse(localStorage.getItem('selectedLat'));
+    const lon = JSON.parse(localStorage.getItem('selectedLon'));
+
+    //const lat = 35.6828387;
+    //const lon = 139.7594549;
+
+    const reverseGeoResponse = await fetch(`
+    https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lon}&apiKey=6f097032f1cc40498b36edaa50ca490a`);
+    const reverseGeoJSON = await reverseGeoResponse.json();
+
+    const oneCallResponse = await fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=6c873417c4c8208022b5eae05b92905a&units=imperial&exclude=minutely, alerts`);
+    const oneCallJSON = await oneCallResponse.json();
+
+    // Change background depending on day or night
+    changeBackground(oneCallJSON.current.dt, oneCallJSON.current.sunrise, oneCallJSON.current.sunset);
+
+    // Organizes data from API calls
+    organizeData(reverseGeoJSON, oneCallJSON);
+  };
+
+  // Parases data from API calls into weatherData array
+  function organizeData(reverseGeoData, oneCallData) {
+    handleDateTime(oneCallData.current.dt);
+    organizeCurrent(reverseGeoData, oneCallData);
+    organizeHourly(oneCallData);
+    organizeDaily(oneCallData);
+  }
+
+  function organizeCurrent(reverseGeoData, oneCallData) {
+    // Stores current forecast data in first index of array
+    setWeatherData([{
+        date: dateTimeObj.formattedDate,
+        time: dateTimeObj.formattedTime,
+        location: `${reverseGeoData.features[0].properties.city}, ${reverseGeoData.features[0].properties.country_code.toUpperCase()}`,
+        currentTemp: oneCallData.current.temp,
+        high: oneCallData.daily[0].temp.max,
+        low: oneCallData.daily[0].temp.min,
+        currentDesc: oneCallData.current.weather[0].description,
+        currentIcon: oneCallData.current.weather[0].icon,
+        summary: oneCallData.daily[0].summary
+      }]
+    )
+  }
+
+  function handleDateTime(dt) {
     // Stores current date and time
-    dateTimeObj = {...dateTimeObj, currentDate: new Date()};
+    dateTimeObj = {...dateTimeObj, currentDate: new Date(dt * 1000)};
 
     // Stores date formatted e.g. "Jun 01"
     dateTimeObj = {...dateTimeObj, formattedDate: dateTimeObj.currentDate.toString().substr(4, 6)};
@@ -46,44 +99,6 @@ function App() {
       dateTimeObj.formattedTime.substr(6, 2) : 
       dateTimeObj.formattedTime.substr(5, 2)
     }
-  }
-
-   // Makes a call to the "Current Weather Data" and "One Call" APIs, stores the responses, and organizes the data
-   const fetchData = async () => {
-    const geolocationResponse = await fetch('http://ip-api.com/json/');
-    const geolocationJSON = await geolocationResponse.json();
-
-    const oneCallResponse = await fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${geolocationJSON.lat}&lon=${geolocationJSON.lon}&appid=6c873417c4c8208022b5eae05b92905a&units=imperial&exclude=minutely, alerts`);
-    const oneCallJSON = await oneCallResponse.json();
-
-    // Change background depending on day or night
-    changeBackground(oneCallJSON.current.dt, oneCallJSON.current.sunrise, oneCallJSON.current.sunset);
-
-    // Organizes data from API calls
-    organizeData(geolocationJSON, oneCallJSON);
-  };
-
-  // Parases data from API calls into weatherData array
-  function organizeData(geolocationData, oneCallData) {
-    organizeCurrent(geolocationData, oneCallData);
-    organizeHourly(oneCallData);
-    organizeDaily(oneCallData);
-  }
-
-  function organizeCurrent(geolocationData, oneCallData) {
-    // Stores current forecast data in first index of array
-    setWeatherData([{
-        date: dateTimeObj.formattedDate,
-        time: dateTimeObj.formattedTime,
-        location: `${geolocationData.city}, ${geolocationData.countryCode}`,
-        currentTemp: oneCallData.current.temp,
-        high: oneCallData.daily[0].temp.max,
-        low: oneCallData.daily[0].temp.min,
-        currentDesc: oneCallData.current.weather[0].description,
-        currentIcon: oneCallData.current.weather[0].icon,
-        summary: oneCallData.daily[0].summary
-      }]
-    )
   }
 
   function organizeHourly(oneCallData) {

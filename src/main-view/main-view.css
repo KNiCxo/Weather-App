@@ -107,11 +107,11 @@
   border-bottom: solid 1px var(--boxBorder);
   text-align: center;
   font-size: 16px;
-  height: 40px;
+  height: fit-content;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  line-height: 20px;
 }
 
 /* Styling for 24 hour forecast */
