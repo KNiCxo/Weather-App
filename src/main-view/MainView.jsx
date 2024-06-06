@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
-
-import current from './current.js';
-import oneCall from './onecall.js'
+import { changeBackground } from '../lib/changeBackground.js';
 
 import Current from './Current.jsx';
 import Hourly from './Hourly.jsx';
 import Daily from './Daily.jsx';
+
+import './main-view.css';
 
 // Creates Current, 24-Hour, and 7-Day Forecasts
 function App() {
@@ -54,8 +54,29 @@ function App() {
 
    // Makes a call to the "Current Weather Data" and "One Call" APIs, stores the responses, and organizes the data
    const fetchData = async () => {
-    currentJSON = current;
-    oneCallJSON = oneCall;
+    if (!JSON.parse(localStorage.getItem('selectedLat'))) {
+      const geolocationResponse = await fetch('http://ip-api.com/json/');
+      const geolocationJSON = await geolocationResponse.json();
+    
+      localStorage.setItem('selectedLat', JSON.stringify(geolocationJSON.lat.toString()));
+      localStorage.setItem('selectedLon', JSON.stringify(geolocationJSON.lon.toString()));
+    }
+
+    const lat = JSON.parse(localStorage.getItem('selectedLat'));
+    const lon = JSON.parse(localStorage.getItem('selectedLon'));
+
+    const currentResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=6c873417c4c8208022b5eae05b92905a&units=imperial`);
+    const currentJSON = await currentResponse.json();
+
+    const oneCallResponse = await fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=6c873417c4c8208022b5eae05b92905a&units=imperial&exclude=minutely, alerts`);
+    const oneCallJSON = await oneCallResponse.json();
+    console.log(oneCallJSON);
+
+    // Change background depending on day or night
+    changeBackground(oneCallJSON.current.dt, oneCallJSON.current.sunrise, oneCallJSON.current.sunset);
+
+    // Organizes data from API calls
+    organizeData(currentJSON, oneCallJSON);
   };
 
   // Parases data from API calls into weatherData array
@@ -71,7 +92,7 @@ function App() {
         date: dateTimeObj.formattedDate,
         time: dateTimeObj.formattedTime,
         location: `${currentData.name}, ${currentData.sys.country}`,
-        currentTemp: currentData.main.temp,
+        currentTemp: oneCallData.current.temp,
         high: oneCallData.daily[0].temp.max,
         low: oneCallData.daily[0].temp.min,
         currentDesc: oneCallData.current.weather[0].description,
@@ -177,9 +198,10 @@ function App() {
 
   // Fetches and organizes necessary data on app mount
   useEffect(() => {
+    console.log(JSON.parse(localStorage.getItem('isDay')));
+    document.body.style.backgroundImage = JSON.parse(localStorage.getItem('isDay'));
     handleDateTime();
     fetchData();
-    organizeData(currentJSON, oneCallJSON);
   }, []);
 
   return (

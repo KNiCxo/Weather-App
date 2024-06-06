@@ -6,7 +6,7 @@ function HourlyForecast(props) {
       {/* Displays daily weather summary and 24 hour forecast */}
       <div className='twenty-four-hour'>
         {/* Displays daily weather summary */}
-        <div class='summary-section'>
+        <div className='summary-section'>
           <p>{`${props.data[0].summary}.`}</p>
         </div>
 

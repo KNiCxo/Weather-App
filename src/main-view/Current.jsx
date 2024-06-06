@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { Link } from "react-router-dom";
 
 function Current(props) {
   return(
@@ -7,7 +8,7 @@ function Current(props) {
       <div className='current-stats'>
         {/* Displays current forecast data */}
         <h1>{`${props.data[0].date}, ${props.data[0].time}`}</h1>
-        <h2>{props.data[0].location} <span className='menu'><img src="menu.png" alt="" /></span></h2>
+        <h2>{props.data[0].location} <Link to='/list'><span className='menu'><img src="menu.png" alt="" /></span></Link></h2>
 
         {/* Displays current temperature */}
         <p className='current-temp'>{`${Math.round(props.data[0].currentTemp)}°F`}</p>

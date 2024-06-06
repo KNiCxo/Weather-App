@@ -1,25 +1,3 @@
-:root {
-  --box: rgba(123, 176, 226, 0.704);
-  --boxBorder: rgba(163, 208, 218, 0.821);
-}
-
-/* Oswald Regular font */
-@font-face {
-  src: url(fonts/Oswald/static/Oswald-Regular.ttf);
-  font-family: oswald-regular;
-}
-
-/* Styling for body */
-body {
-  background-image: url("sky.jpg");
-  background-size: 1500px;
-  background-position-x: 800px;
-  background-position-y: 1000px;
-  background-attachment: fixed;
-  font-family: oswald-regular;
-  color: white;
-}
-
 /* Styling for current forecast data */
 .current-stats {
   text-align: center;
