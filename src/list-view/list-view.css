@@ -4,17 +4,151 @@
   font-family: roboto-medium;
 }
 
+/* Styling for search bar container */
 .search {
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: white;
+  margin: 40px auto;
+  width: 300px;
+  border-radius: 20px;
 }
 
+/* Styling for search bar input field */
 .search input {
   font-family: roboto-medium;
+  border: none;
+  outline: none;
+  width: 200px;
+  height: 15px;
+  padding: 12px;
+  font-size: 20px;
+  color: rgb(69, 66, 66)
 }
 
+/* Styling for magnifying glass button */
 .search-icon {
   width: 25px;
   height: 25px;
   position: relative;
-  top: 8px;
+  top: 7px;
+  right: 5px;
+}
+
+.search-icon:hover {
+  cursor: pointer;
+}
+
+/* Formats city list component and arrows to be in a row when arrows are visible */
+.city-container {
+  display: flex;
+}
+
+/* Styling for city list component for when it is big and small */
+.city-div, .city-div-small:not(:first-child) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0px auto 20px;
+  width: 320px;
+  height: 100px;
+  background-color: var(--box);
+  font-size: 25px;
+  border-radius: 20px;
+}
+
+/* Shrinks elements in city list component for when arrows are visible */
+.city-div-small {
+  width: 270px;
+  height: 80px;
+  font-size: 20px;
+}
+
+/* Adds space to the left between city name and its div box */
+.city-name {
+  padding-left: 12px;
+}
+
+/* Styling for city weather condition image */
+.city-image {
+  width: 60px;
+  height: 60px;
+}
+
+/* Shrinks size of city weather condition image when arrows are visible */
+.city-div-small:first-child .city-image-small{
+  width: 45px;
+  height: 45px;
+}
+
+/* Styling for city temperature div box */
+.city-temps {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin: 0 20px 0 auto;
+}
+
+/* Styling for city current temperature for when it is big and small */
+.city-current {
+  font-size: 50px;
+  text-align: center;
+  margin: 5px auto -20px 10px;
+}
+
+/* Shrinks size of current temperature font when arrows are visible */
+.city-div-small:first-child .city-current-small {
+  font-size: 35px;
+  margin: 5px auto -12px 12px;
+}
+
+/* Styling for the city's high and low temperatures */
+.city-high-low {
+  display: flex;
+  flex-direction: row;
+  font-size: 15px;
+}
+
+/* Shrinks size of high and low temperature font when arrows are visible */
+.city-div-small:first-child .city-high-low-small {
+  font-size: 12px;
+}
+
+/* Creates space between high and low temperatures */
+.city-high-low p:first-child {
+  margin-right: 5px;
+}
+
+/* Styling for movement arrow div box */
+.arrow-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  top: 25px;
+  right: -3px;
+  background-color: rgba(255, 255, 255, 0.89);
+  width: 80px;
+  height: 30px;
+  border-radius: 10px;
+}
+
+/* Styling for both arrows */
+.arrow-div img {
+  width: 25px;
+  height: 25px;
+}
+
+.arrow-div img:hover {
+  cursor: pointer;
+}
+
+/* Creates space for arrows */
+.up-arrow {
+  margin-left: 6px;
+}
+
+.down-arrow {
+  margin-left: 15px;
 }

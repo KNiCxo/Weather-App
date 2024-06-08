@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import { changeBackground } from '../lib/changeBackground.js';
 
+import './main-view.css';
+
+// Import weather display components
 import Current from './Current.jsx';
 import Hourly from './Hourly.jsx';
 import Daily from './Daily.jsx';
-
-import './main-view.css';
 
 // Creates Current, 24-Hour, and 7-Day Forecasts
 function App() {
@@ -15,8 +16,11 @@ function App() {
   // Stores data necessary for forecasts from OpenWeatherMap API as an array of objects
   const [weatherData, setWeatherData] = useState([]);
 
-   // Makes a call to the "Current Weather Data" and "One Call" APIs, stores the responses, and organizes the data
-   const fetchData = async () => {
+  // Makes a call to the Reverse Geoloocation and "One Call" APIs, stores the responses, and organizes the data
+  const fetchData = async () => {
+    // When a component on ListView is clicked, two values called "selectedLat" and "selectedLon" will be set
+    // When the main view is loaded, those values will be used to get the correct weather data
+    // If those values have not been set, set them based on the current location using the Geolocation API
     if (!JSON.parse(localStorage.getItem('selectedLat'))) {
       const geolocationResponse = await fetch('http://ip-api.com/json/');
       const geolocationJSON = await geolocationResponse.json();
@@ -24,11 +28,11 @@ function App() {
       localStorage.setItem('selectedLon', JSON.stringify(geolocationJSON.lon));
     }
 
-    const lat = JSON.parse(localStorage.getItem('selectedLat'));
-    const lon = JSON.parse(localStorage.getItem('selectedLon'));
+    //const lat = JSON.parse(localStorage.getItem('selectedLat'));
+    //const lon = JSON.parse(localStorage.getItem('selectedLon'));
 
-    //const lat = 35.6828387;
-    //const lon = 139.7594549;
+    const lat = -36.852095;
+    const lon = 174.7631803;
 
     const reverseGeoResponse = await fetch(`
     https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lon}&apiKey=6f097032f1cc40498b36edaa50ca490a`);
@@ -46,31 +50,18 @@ function App() {
 
   // Parases data from API calls into weatherData array
   function organizeData(reverseGeoData, oneCallData) {
-    handleDateTime(oneCallData.current.dt);
+    handleDateTime(oneCallData.current.dt, oneCallData.timezone_offset / 3600);
     organizeCurrent(reverseGeoData, oneCallData);
     organizeHourly(oneCallData);
     organizeDaily(oneCallData);
   }
 
-  function organizeCurrent(reverseGeoData, oneCallData) {
-    // Stores current forecast data in first index of array
-    setWeatherData([{
-        date: dateTimeObj.formattedDate,
-        time: dateTimeObj.formattedTime,
-        location: `${reverseGeoData.features[0].properties.city}, ${reverseGeoData.features[0].properties.country_code.toUpperCase()}`,
-        currentTemp: oneCallData.current.temp,
-        high: oneCallData.daily[0].temp.max,
-        low: oneCallData.daily[0].temp.min,
-        currentDesc: oneCallData.current.weather[0].description,
-        currentIcon: oneCallData.current.weather[0].icon,
-        summary: oneCallData.daily[0].summary
-      }]
-    )
-  }
+  // Handles date and time data needed for component
+  function handleDateTime(dt, timeZoneOffset) {
+    const localTimeOffset = (new Date()).getTimezoneOffset() / 60;
 
-  function handleDateTime(dt) {
     // Stores current date and time
-    dateTimeObj = {...dateTimeObj, currentDate: new Date(dt * 1000)};
+    dateTimeObj = {...dateTimeObj, currentDate: new Date((dt * 1000) + ((localTimeOffset + timeZoneOffset) * 3600) * 1000)};
 
     // Stores date formatted e.g. "Jun 01"
     dateTimeObj = {...dateTimeObj, formattedDate: dateTimeObj.currentDate.toString().substr(4, 6)};
@@ -101,6 +92,24 @@ function App() {
     }
   }
 
+  // Organizes data for the "Current" weather component
+  function organizeCurrent(reverseGeoData, oneCallData) {
+    // Stores current forecast data in first index of array
+    setWeatherData([{
+        date: dateTimeObj.formattedDate,
+        time: dateTimeObj.formattedTime,
+        location: `${reverseGeoData.features[0].properties.city}, ${reverseGeoData.features[0].properties.country_code.toUpperCase()}`,
+        currentTemp: oneCallData.current.temp,
+        high: oneCallData.daily[0].temp.max,
+        low: oneCallData.daily[0].temp.min,
+        currentDesc: oneCallData.current.weather[0].description,
+        currentIcon: oneCallData.current.weather[0].icon,
+        summary: oneCallData.daily[0].summary
+      }]
+    )
+  }
+
+  // Organizes data for the "Hourly" weather component
   function organizeHourly(oneCallData) {
     // Stores the first hourly forecast data into the next index of array
     const firstHourly = {
@@ -150,6 +159,7 @@ function App() {
     }
   }
 
+  // Organizes data for the "Daily" weather component
   function organizeDaily(oneCallData) {
     // Stores the first daily forecast data into the next index of array
     const firstDaily = {
@@ -198,7 +208,6 @@ function App() {
   // Fetches and organizes necessary data on app mount
   useEffect(() => {
     document.body.style.backgroundImage = JSON.parse(localStorage.getItem('isDay'));
-    handleDateTime();
     fetchData();
   }, []);
 

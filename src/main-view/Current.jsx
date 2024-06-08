@@ -6,7 +6,7 @@ function Current(props) {
     <>
       {/* Displays current forecast data */}
       <div className='current-stats'>
-        {/* Displays current forecast data */}
+        {/* Displays current date and time */}
         <h1>{`${props.data[0].date}, ${props.data[0].time}`}</h1>
         <h2>{props.data[0].location} <Link to='/list'><span className='menu'><img src="menu.png" alt="" /></span></Link></h2>
 

@@ -1,5 +1,9 @@
+/* Variables used throughout the various stylesheets */
 :root {
+  /* Used for div container components */
   --box: rgba(123, 176, 226, 0.704);
+
+  /* Used for the lines that divide the div containers */
   --boxBorder: rgba(163, 208, 218, 0.821);
 }
 

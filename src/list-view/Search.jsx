@@ -1,3 +1,4 @@
+// Search bar component for ListView
 function Search() {
   return(
     <>
