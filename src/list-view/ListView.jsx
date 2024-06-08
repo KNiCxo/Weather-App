@@ -61,7 +61,7 @@ function ListView() {
     if (cityList.Length != 0) {
       return(
         <>
-          {/* Iterates through city list and creates city component and movement arrows */}
+          {/* Iterates through city list and creates city component, movement arrows, and a remove button */}
           {cityList.map((city, index) =>
             <div className='city-container' key={index} >
               <City lat={city.lat} lon={city.lon}></City> 
@@ -70,6 +70,8 @@ function ListView() {
                 <img className='up-arrow' src="up.png" alt="" /> 
                 <img className='down-arrow' src="down.png" alt="" />
               </div>
+
+              <img className='remove' src="remove.png" alt="" />
             </div>
           )}
         </>

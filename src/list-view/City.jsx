@@ -33,7 +33,7 @@ function City(props) {
           {/* Container to hold all component data */}
           <div className='city-div city-div-small'>
             {/* City name */}
-            <p className='city-name city-name-small'>{cityData.city}</p>
+            <p className='city-name'>{cityData.city}</p>
 
             {/* Weather condition */}
             <img className='city-image city-image-small' src={`${cityData.currentIcon}.png`} alt="" />

@@ -40,7 +40,7 @@
   cursor: pointer;
 }
 
-/* Formats city list component and arrows to be in a row when arrows are visible */
+/* Formats city list component,arrows, and remove button to be in a row when arrows are visible */
 .city-container {
   display: flex;
 }
@@ -60,8 +60,9 @@
 
 /* Shrinks elements in city list component for when arrows are visible */
 .city-div-small {
-  width: 270px;
-  height: 80px;
+  margin-left: 0px;
+  width: 230px;
+  height: 70px;
   font-size: 20px;
 }
 
@@ -99,7 +100,7 @@
 
 /* Shrinks size of current temperature font when arrows are visible */
 .city-div-small:first-child .city-current-small {
-  font-size: 35px;
+  font-size: 28px;
   margin: 5px auto -12px 12px;
 }
 
@@ -112,7 +113,7 @@
 
 /* Shrinks size of high and low temperature font when arrows are visible */
 .city-div-small:first-child .city-high-low-small {
-  font-size: 12px;
+  font-size: 10px;
 }
 
 /* Creates space between high and low temperatures */
@@ -126,18 +127,18 @@
   flex-direction: row;
   align-items: center;
   position: relative;
-  top: 25px;
-  right: -3px;
+  top: 20px;
+  right: 12px;
   background-color: rgba(255, 255, 255, 0.89);
-  width: 80px;
+  width: 70px;
   height: 30px;
   border-radius: 10px;
 }
 
 /* Styling for both arrows */
 .arrow-div img {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
 }
 
 .arrow-div img:hover {
@@ -146,9 +147,21 @@
 
 /* Creates space for arrows */
 .up-arrow {
-  margin-left: 6px;
+  margin-left: 8px;
 }
 
 .down-arrow {
-  margin-left: 15px;
+  margin-left: 13px;
+}
+
+/* Styling for remove button */
+.remove {
+  width: 35px;
+  height: 35px;
+  position: relative;
+  top: 18px;
+}
+
+.remove:hover {
+  cursor: pointer;
 }
