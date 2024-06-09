@@ -16,7 +16,7 @@ function App() {
   // Stores data necessary for forecasts from OpenWeatherMap API as an array of objects
   const [weatherData, setWeatherData] = useState([]);
 
-  // Makes a call to the Reverse Geoloocation and "One Call" APIs, stores the responses, and organizes the data
+  // Makes a call to the Reverse Geocoding and "One Call" APIs, stores the responses, and organizes the data
   const fetchData = async () => {
     // When a component on ListView is clicked, two values called "selectedLat" and "selectedLon" will be set
     // When the main view is loaded, those values will be used to get the correct weather data

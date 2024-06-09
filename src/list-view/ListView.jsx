@@ -87,7 +87,7 @@ function ListView() {
 
   return(
     <>
-      <Search></Search>
+      <Search setCityList={setCityList}></Search>
       {displayLocal()}
       {displayCities()}
     </>
