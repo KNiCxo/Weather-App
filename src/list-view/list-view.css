@@ -58,7 +58,7 @@
   list-style-type: none;
   margin: -32px 0 20px;
   background-color: white;
-  width: 280px;
+  width: 290px;
   padding: 18px 0;
   border-radius: 20px;
 }
@@ -67,24 +67,24 @@
 .search-results li {
   padding: 15px;
   color: rgb(69, 66, 66);
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .search-results li:hover {
   background-color: rgb(246, 241, 241);
-  cursor: pointer;
 }
 
 /* Styling for search results "Add" button */
-.search-results li span {
+.add-button {
   float: right;
   color: rgb(19, 95, 176);
-  padding-right: 5px;
+  padding-right: 0px;
   line-height: 20px;
-  font-size: 14px;
+  font-size: 13px;
 }
 
-.search-results li span:hover {
+.add-button:hover {
+  cursor: pointer;
   color: rgb(59, 171, 240);
   text-decoration: underline;
 }
