@@ -12,6 +12,9 @@ function Search(props) {
   const getLocations = async () => {
     // Calls API only if there is user input
     if (inputRef.current.value) {
+      // Adds focus to input field so that search results can be closed easier
+      inputRef.current.focus();
+
       // Use user input to make API call
       const geocodingResponse = await fetch(`
       http://api.openweathermap.org/geo/1.0/direct?q=${inputRef.current.value}&limit=5&appid=6c873417c4c8208022b5eae05b92905a`);
@@ -68,19 +71,13 @@ function Search(props) {
     localStorage.setItem('cityList', JSON.stringify(newCityList));
   }
 
-  // On mount, adds an event listener to the body
-  useEffect(() => {
-    // Results div clears when clicked off of it
-    document.body.addEventListener('click', () => setLocationList(null))
-  }, [])
-  
   return(
     <>
       {/* Container for search bar, magnifying glass image, and search results */}
       <div className='search'>
         {/* Get access to input field using ref */}
         <div className='search-bar'>
-          <input ref={inputRef} type="text" placeholder='Search City'/>
+          <input ref={inputRef} onBlur={() => setLocationList(null)} type="text" placeholder='Search City'/>
           <img className='search-icon' src="search.png" alt="" onClick={getLocations}/>
         </div>
 
