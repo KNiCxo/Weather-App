@@ -81,7 +81,7 @@ function Search(props) {
             <input ref={inputRef} onBlur={() => setLocationList(null)} type="text" placeholder='Search City'/>
             <img className='search-icon' onClick={getLocations} src="search.png" alt=""/>
           </div>
-          <img className='edit-icon' onClick={props.enable} src="edit.png" alt="" />
+          <img className='edit-icon' onClick={props.enableEdits} src="edit.png" alt="" />
         </div>
 
         {/* Displays array if it exist s*/}
@@ -92,7 +92,7 @@ function Search(props) {
               {locationList.map((city, index) => (
                 <li key={index}>
                   {/* Displays city name, state, and country, along with an "Add" button */}
-                  {city.name}, {city.state} {city.country} <span className='add-button' onClick={() => addLocation(index)}>Add</span>
+                  {city.name}, {city.state} {city.country} <span className='add-button' onMouseDown={() => addLocation(index)}>Add</span>
                 </li>
               ))}
             </ul>
