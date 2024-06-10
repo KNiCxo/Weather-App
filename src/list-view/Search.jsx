@@ -76,9 +76,12 @@ function Search(props) {
       {/* Container for search bar, magnifying glass image, and search results */}
       <div className='search'>
         {/* Get access to input field using ref */}
-        <div className='search-bar'>
-          <input ref={inputRef} onBlur={() => setLocationList(null)} type="text" placeholder='Search City'/>
-          <img className='search-icon' src="search.png" alt="" onClick={getLocations}/>
+        <div className='search-top-row'>
+          <div className='search-bar'>
+            <input ref={inputRef} onBlur={() => setLocationList(null)} type="text" placeholder='Search City'/>
+            <img className='search-icon' onClick={getLocations} src="search.png" alt=""/>
+          </div>
+          <img className='edit-icon' onClick={props.enable} src="edit.png" alt="" />
         </div>
 
         {/* Displays array if it exist s*/}

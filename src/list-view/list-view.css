@@ -4,10 +4,17 @@
   font-family: roboto-medium;
 }
 
-/* Styling for div that contains search bar and results*/
+/* Styling for div that contains search bar, edit button, and results */
 .search {
   display: flex;
   flex-direction: column;
+}
+
+.search-top-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 /* Styling for search bar */
@@ -16,7 +23,7 @@
   flex-direction: row;
   justify-content: center;
   background-color: white;
-  margin: 40px auto;
+  margin: 40px 0px;
   width: 300px;
   border-radius: 20px;
 }
@@ -47,9 +54,19 @@
   cursor: pointer;
 }
 
+/* Styling for edit button */
+.edit-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.edit-icon:hover {
+  cursor: pointer;
+}
+
 /* Centers search results div box */
 .search-results {
-  margin: 0 auto;
+  margin: 0 15px;
   font-family: roboto-medium;
 }
 
@@ -98,6 +115,7 @@
 /* Formats city list component,arrows, and remove button to be in a row when arrows are visible */
 .city-container {
   display: flex;
+  flex-direction: column;
 }
 
 /* Styling for city list component for when it is big and small */
@@ -115,10 +133,10 @@
 
 /* Shrinks elements in city list component for when arrows are visible */
 .city-div-small {
-  margin-left: 0px;
-  width: 230px;
-  height: 70px;
-  font-size: 14px;
+  margin: 0 auto;
+  width: 290px;
+  height: 80px;
+  font-size: 20px;
 }
 
 /* Adds space to the left between city name and its div box */
@@ -156,7 +174,7 @@
 /* Shrinks size of current temperature font when arrows are visible */
 .city-div-small:first-child .city-current-small {
   font-size: 28px;
-  margin: 5px auto -12px 12px;
+  margin: 5px auto -12px 18px;
 }
 
 /* Styling for the city's high and low temperatures */
@@ -168,7 +186,7 @@
 
 /* Shrinks size of high and low temperature font when arrows are visible */
 .city-div-small:first-child .city-high-low-small {
-  font-size: 10px;
+  font-size: 13px;
 }
 
 /* Creates space between high and low temperatures */
@@ -176,37 +194,37 @@
   margin-right: 5px;
 }
 
+/* Styling for edit options div */
+.edit-options {
+  display: none;
+  flex-direction: row;
+  justify-content: center;
+  margin: 5px 0 20px;
+}
+
 /* Styling for movement arrow div box */
 .arrow-div {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-evenly;
+  margin-right: 20px;
   position: relative;
-  top: 20px;
-  right: 12px;
+  top: 3px;
   background-color: rgba(255, 255, 255, 0.89);
-  width: 70px;
+  width: 200px;
   height: 30px;
   border-radius: 10px;
 }
 
 /* Styling for both arrows */
 .arrow-div img {
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
 }
 
 .arrow-div img:hover {
   cursor: pointer;
-}
-
-/* Creates space for arrows */
-.up-arrow {
-  margin-left: 8px;
-}
-
-.down-arrow {
-  margin-left: 13px;
 }
 
 /* Styling for remove button */
@@ -214,7 +232,7 @@
   width: 35px;
   height: 35px;
   position: relative;
-  top: 18px;
+  top: 2px;
 }
 
 .remove:hover {

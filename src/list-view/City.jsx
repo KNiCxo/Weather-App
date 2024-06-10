@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react';
 // Displays the weather data of a city based on the latitude and longitude values passed to it
 function City(props) {
   // Stores the city's weather data as an object
-  const [cityData, setCityData] = useState(null)
+  const [cityData, setCityData] = useState(null);
 
   // Fetches data from the Reverse Geolocation and "OneCall" APIs to get the city's name and weather data
   // Uses the latitude and longitude values passed to it to achieve this
@@ -31,20 +31,22 @@ function City(props) {
       return(
         <>
           {/* Container to hold all component data */}
-          <div className='city-div city-div-small'>
+          <div className={props.enableCityStyles ? 'city-div city-div-small' : 'city-div'}>
             {/* City name */}
             <p className='city-name'>{cityData.city}</p>
 
             {/* Weather condition */}
-            <img className='city-image city-image-small' src={`${cityData.currentIcon}.png`} alt="" />
+            <img className={props.enableCityStyles ? 'city-image city-image-small' : 'city-image'} 
+            src={`${cityData.currentIcon}.png`} alt="" />
 
             {/* Container to hold the temperature data */}
             <div className='city-temps'>
               {/* Current temperature */}
-              <p className='city-current city-current-small'>{`${Math.round(cityData.currentTemp)}°`}</p>
+              <p className={props.enableCityStyles ? 'city-current city-current-small' : 'city-current'}>
+              {`${Math.round(cityData.currentTemp)}°`}</p>
 
               {/* Temperature high and low */}
-              <div className='city-high-low city-high-low-small'>
+              <div className='city-high-low'>
                 <p>{`H: ${Math.round(cityData.high)}°`}</p>
                 <p>{`L: ${Math.round(cityData.low)}°`}</p>
               </div>
