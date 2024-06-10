@@ -15,18 +15,7 @@ function ListView() {
   // Stores the latitude and longitude values as objects for the cities that the user has chosen
   const [cityList, setCityList] = useState(
     // If cityList is saved in local storage, use as default, otherwise set as empty
-    // *** USES TEST SET TEMPORARILY ***
-    JSON.parse(localStorage.getItem('cityList')) ? JSON.parse(localStorage.getItem('cityList')) :
-    [
-      {
-        lat: 37.77,
-        lon: -122.41
-      },
-      {
-        lat: 35.6828387,
-        lon: 139.7594549
-      }
-    ]
+    JSON.parse(localStorage.getItem('cityList')) ? JSON.parse(localStorage.getItem('cityList')) : []
   );
 
   // Fetches data from the Geolocation and "One Call" APIs to be able to set the background image and current location
@@ -49,6 +38,7 @@ function ListView() {
       return(
         <>
           {/* Uses lat and lon values from localCity object so that component can get the correct data */}
+          <p className='current-location'>Current Location:</p>
           <City lat={localCity.lat} lon={localCity.lon}></City>
         </>
       );
@@ -87,7 +77,7 @@ function ListView() {
 
   return(
     <>
-      <Search setCityList={setCityList}></Search>
+      <Search cityList={cityList} setCityList={setCityList}></Search>
       {displayLocal()}
       {displayCities()}
     </>

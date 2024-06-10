@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 
 // Search bar component for ListView
 function Search(props) {
@@ -24,7 +24,12 @@ function Search(props) {
       geocodingJSON.forEach(city => {
         // If array is empty, push first object into it
         if (cityArray.length === 0) {
-          cityArray.push({name: city.name, state: city.state ? `${city.state},` : '', country: city.country});
+          // If there is not a state, then keep state key empty
+          cityArray.push({name: city.name, 
+                          state: city.state ? `${city.state},` : '', 
+                          country: city.country,
+                          lat: city.lat,
+                          lon: city.lon});
         } else {
           // Iterate through temp array and skip result if it already exists
           for (let i = 0; i < cityArray.length; i++) {
@@ -33,7 +38,11 @@ function Search(props) {
             }
           }
           // Else, push into array
-          cityArray.push({name: city.name, state: city.state ? `${city.state},` : '', country: city.country});
+          cityArray.push({name: city.name, 
+                          state: city.state ? `${city.state},` : '', 
+                          country: city.country,
+                          lat: city.lat,
+                          lon: city.lon});
         }
       });
 
@@ -41,6 +50,29 @@ function Search(props) {
       setLocationList(cityArray);
     }
   };
+
+  // Adds location to the city list and saves the new list in local storage
+  // Uses the index of the li to add the correct city
+  function addLocation(index) {
+    // Iterates through each city in the list and compares to see if the result matches any of them
+    // If it does, return
+    for (let i = 0; i < props.cityList.length; i++) {
+      if (props.cityList[i].lat === locationList[index].lat && props.cityList[i].lon === locationList[index].lon) {
+        return;
+      }
+    }
+
+    // If result doesn't match anything in the city list, then set new cityList state and save to local storage
+    const newCityList = [...props.cityList, {lat: locationList[index].lat, lon: locationList[index].lon}]
+    props.setCityList(newCityList);
+    localStorage.setItem('cityList', JSON.stringify(newCityList));
+  }
+
+  // On mount, adds an event listener to the body
+  useEffect(() => {
+    // Results div clears when clicked off of it
+    document.body.addEventListener('click', () => setLocationList(null))
+  }, [])
   
   return(
     <>
@@ -60,7 +92,7 @@ function Search(props) {
               {locationList.map((city, index) => (
                 <li key={index}>
                   {/* Displays city name, state, and country, along with an "Add" button */}
-                  {city.name}, {city.state} {city.country} <span className='add-button'>Add</span>
+                  {city.name}, {city.state} {city.country} <span className='add-button' onClick={() => addLocation(index)}>Add</span>
                 </li>
               ))}
             </ul>

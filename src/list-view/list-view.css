@@ -89,6 +89,12 @@
   text-decoration: underline;
 }
 
+.current-location {
+  text-align: center;
+  font-size: 18px;
+  margin: 0;
+}
+
 /* Formats city list component,arrows, and remove button to be in a row when arrows are visible */
 .city-container {
   display: flex;
@@ -112,7 +118,7 @@
   margin-left: 0px;
   width: 230px;
   height: 70px;
-  font-size: 20px;
+  font-size: 14px;
 }
 
 /* Adds space to the left between city name and its div box */
