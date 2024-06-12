@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { changeBackground } from '../lib/changeBackground.js';
 
 import './main-view.css';
+import './main-res.css';
 
 // Import weather display components
 import Current from './Current.jsx';

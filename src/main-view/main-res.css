@@ -1,0 +1,119 @@
+@media only screen and (min-width: 800px) {
+  /* Styling for current forecast data */
+  .current-stats {
+    margin-top: 50px;
+    margin-bottom: 0px;
+  }
+
+  /* Styling for current date and time */
+  .current-stats h1 {
+    font-size: 35px;
+    margin-bottom: 0;
+  }
+
+  /* Styling for location */
+  .current-stats h2 {
+    margin: 0 0 30px;
+    font-size: 45px;
+  }
+
+  /* Styling for ListView button */
+  .menu {
+    width: 70px;
+    height: 70px;
+    position: relative;
+    top: 8px;
+  }
+
+  .menu img{
+    width: 60px;
+    height: 60px;
+    position: relative;
+    top: 4px;
+  }
+
+  /* Styling for current temperature data */
+  .current-temp {
+    font-size: 100px;
+    width: 230px;
+    height: 130px;
+    line-height: 120px;
+  }
+
+  /* Styling for current weather condition data */
+  .current-weather-con {
+    width: 280px;
+    height: 60px;
+    border-radius: 10px;
+  }
+
+  .current-weather-con p{
+    font-size: 24px;
+  }
+
+  /* Styling for the image element for the current weather condition data */
+  .current-weather-con img {
+    width: 85px;
+    height: 85px;
+    position: relative;
+    top: 0px;
+  }
+
+  /* Styling for the current high and low temperature data */
+  .current-high-low {
+    margin-top: -15px;
+    font-size: 35px;
+  }
+
+  /* Styling for paragraph element for current high and low temperature data */
+  .current-high-low p {
+    width: 105px;
+  }
+
+  /* Styling for daily summary and 24 hour forecast box */
+  .twenty-four-hour {
+    width: 80%;
+    margin: 0 auto 30px;
+  }
+
+  /* Styling for daily summary */
+  .summary-section {
+    font-size: 20px;
+    line-height: 30px;
+    padding: 5px 20px;
+  }
+
+  /* Styling for individual hour paragraph elements */
+  .hourly-data p {
+    font-size: 21px;
+  }
+
+  /* Styling for individual hour image elements */
+  .hourly-data img {
+    width: 50px;
+    height: 50px;
+  }
+
+  /* Styling for 7 day forecast */
+  .seven-day {
+    width: 80%;
+  }
+
+  /* Styling for individual day boxes */
+  .daily-data, .daily-high-low {
+    height: 45px;
+    padding: 10px;
+    font-size: 30px;
+  }
+
+  /* Adjusts daily weather condition image */
+  .daily-data img {
+    width: 65px;
+    height: 65px;
+  }
+
+  /* Creates space between the daily highs/lows */
+  .daily-high-low p:first-child{
+    margin-right: 25px;
+  }
+}
