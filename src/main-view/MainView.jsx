@@ -28,11 +28,8 @@ function App() {
       localStorage.setItem('selectedLon', JSON.stringify(geolocationJSON.lon));
     }
 
-    //const lat = JSON.parse(localStorage.getItem('selectedLat'));
-    //const lon = JSON.parse(localStorage.getItem('selectedLon'));
-
-    const lat = -36.852095;
-    const lon = 174.7631803;
+    const lat = JSON.parse(localStorage.getItem('selectedLat'));
+    const lon = JSON.parse(localStorage.getItem('selectedLon'));
 
     const reverseGeoResponse = await fetch(`
     https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lon}&apiKey=6f097032f1cc40498b36edaa50ca490a`);

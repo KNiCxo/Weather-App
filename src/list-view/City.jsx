@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { Link } from "react-router-dom";
 
 // Displays the weather data of a city based on the latitude and longitude values passed to it
 function City(props) {
@@ -31,30 +32,37 @@ function City(props) {
       return(
         <>
           {/* Container to hold all component data */}
-          <div className={props.enableCityStyles ? 'city-div city-div-small' : 'city-div'}>
-            {/* City name */}
-            <p className='city-name'>{cityData.city}</p>
+          <Link to='/' style={{color: 'white', textDecoration: 'none' }} onClick={setLatLon}>
+            <div className={props.enableCityStyles ? 'city-div city-div-small' : 'city-div'}>
+              {/* City name */}
+              <p className='city-name'>{cityData.city}</p>
 
-            {/* Weather condition */}
-            <img className={props.enableCityStyles ? 'city-image city-image-small' : 'city-image'} 
-            src={`${cityData.currentIcon}.png`} alt="" />
+              {/* Weather condition */}
+              <img className={props.enableCityStyles ? 'city-image city-image-small' : 'city-image'} 
+              src={`${cityData.currentIcon}.png`} alt="" />
 
-            {/* Container to hold the temperature data */}
-            <div className='city-temps'>
-              {/* Current temperature */}
-              <p className={props.enableCityStyles ? 'city-current city-current-small' : 'city-current'}>
-              {`${Math.round(cityData.currentTemp)}°`}</p>
+              {/* Container to hold the temperature data */}
+              <div className='city-temps'>
+                {/* Current temperature */}
+                <p className={props.enableCityStyles ? 'city-current city-current-small' : 'city-current'}>
+                {`${Math.round(cityData.currentTemp)}°`}</p>
 
-              {/* Temperature high and low */}
-              <div className='city-high-low'>
-                <p>{`H: ${Math.round(cityData.high)}°`}</p>
-                <p>{`L: ${Math.round(cityData.low)}°`}</p>
+                {/* Temperature high and low */}
+                <div className='city-high-low'>
+                  <p>{`H: ${Math.round(cityData.high)}°`}</p>
+                  <p>{`L: ${Math.round(cityData.low)}°`}</p>
+                </div>
               </div>
             </div>
-          </div>
+          </Link>
         </>
       );
     }
+  }
+
+  function setLatLon() {
+    localStorage.setItem('selectedLat', JSON.stringify(props.lat));
+    localStorage.setItem('selectedLon', JSON.stringify(props.lon));
   }
 
   // On mount, fetches data needed for component

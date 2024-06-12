@@ -61,8 +61,8 @@ function ListView() {
 
               <div className='edit-options'>
                 <div className='arrow-div'>
-                  <img className='up-arrow' onClick={moveUp} src="up.png" alt="" /> 
-                  <img className='down-arrow' onClick={moveDown} src="down.png" alt="" />
+                  <img className='up-arrow' onClick={() => moveUp(index)} src="up.png" alt="" /> 
+                  <img className='down-arrow' onClick={() => moveDown(index)} src="down.png" alt="" />
                 </div>
 
                 <img className='remove' onClick={() => removeCity(index)} src="remove.png" alt="" />
@@ -98,16 +98,27 @@ function ListView() {
     setEnableCityStyles(!enableCityStyles);
   }
 
+  // Switches the selected city with the one above it as long as it is not the first index
   function moveUp(index) {
-
+    const updatedList = [...cityList];
+    if (index > 0) {
+      [updatedList[index], updatedList[index - 1]] = [updatedList[index - 1], updatedList[index]];
+      localStorage.setItem('cityList', JSON.stringify(updatedList));
+      setCityList(updatedList);
+    }
   }
 
+  // Switches the selected city with the one below it as long as it is not the last index
   function moveDown(index) {
+    const updatedList = [...cityList];
+    if (index < updatedList.length - 1) {
+      [updatedList[index], updatedList[index + 1]] = [updatedList[index + 1], updatedList[index]];
+      setCityList(updatedList);
+    }
+   }
 
-  }
-
+  // Finds city component that matches the index and removes it then updates the city list
   function removeCity(index) {
-    console.log(index);
     const newCityList = cityList.filter((_, i) => index !== i);
     localStorage.setItem('cityList', JSON.stringify(newCityList));
     setCityList(newCityList);

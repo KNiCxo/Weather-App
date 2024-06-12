@@ -69,6 +69,9 @@ function Search(props) {
     const newCityList = [...props.cityList, {lat: locationList[index].lat, lon: locationList[index].lon}]
     props.setCityList(newCityList);
     localStorage.setItem('cityList', JSON.stringify(newCityList));
+
+    // Clear input field
+    inputRef.current.value = '';
   }
 
   return(

@@ -63,7 +63,7 @@
 
 /* Styling for the paragraph element for the current weather condition data */
 .current-weather-con p{
-  font-size: 25px;
+  font-size: 19px;
   text-transform: capitalize;
 }
 
@@ -113,6 +113,7 @@
   justify-content: center;
   align-items: center;
   line-height: 20px;
+  padding: 0 6px;
 }
 
 /* Styling for 24 hour forecast */
