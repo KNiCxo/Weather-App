@@ -117,3 +117,30 @@
     margin-right: 25px;
   }
 }
+
+@media only screen and (min-width: 1080px) {
+  /* Styling for daily summary and 24 hour forecast box */
+  .twenty-four-hour {
+    width: 50%;
+  }
+
+  /* Styling for daily summary */
+  .summary-section {
+    font-size: 24px;
+  }
+
+  /* Styling for individual hour boxes */
+  .hourly-data {
+    padding-left: 27px;
+  }
+
+  /* Styling for individual hour paragraph elements */
+  .hourly-data p {
+    font-size: 25px;
+  }
+
+  /* Styling for 7 day forecast */
+  .seven-day {
+    width: 50%;
+  }
+}
