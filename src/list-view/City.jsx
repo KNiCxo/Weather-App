@@ -32,7 +32,7 @@ function City(props) {
       return(
         <>
           {/* Container to hold all component data */}
-          <Link to='/' style={{color: 'white', textDecoration: 'none' }} onClick={setLatLon}>
+          <Link className={props.enableCityStyles ? 'list-link list-link-small' : 'list-link'} to='/' onClick={setLatLon}>
             <div className={props.enableCityStyles ? 'city-div city-div-small' : 'city-div'}>
               {/* City name */}
               <p className='city-name'>{cityData.city}</p>
@@ -48,7 +48,7 @@ function City(props) {
                 {`${Math.round(cityData.currentTemp)}°`}</p>
 
                 {/* Temperature high and low */}
-                <div className='city-high-low'>
+                <div className={props.enableCityStyles ? 'city-high-low city-high-low-small' : 'city-high-low'}>
                   <p>{`H: ${Math.round(cityData.high)}°`}</p>
                   <p>{`L: ${Math.round(cityData.low)}°`}</p>
                 </div>

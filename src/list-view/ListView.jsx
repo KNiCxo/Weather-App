@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { changeBackground } from '../lib/changeBackground.js';
 
 import './list-view.css';
+import './list-res.css';
 
 // Import search bar and city list component
 import Search from './Search.jsx';

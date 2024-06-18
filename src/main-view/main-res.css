@@ -74,6 +74,7 @@
   .twenty-four-hour {
     width: 80%;
     margin: 0 auto 30px;
+    border-radius: 25px;
   }
 
   /* Styling for daily summary */
@@ -97,6 +98,7 @@
   /* Styling for 7 day forecast */
   .seven-day {
     width: 80%;
+    border-radius: 25px;
   }
 
   /* Styling for individual day boxes */

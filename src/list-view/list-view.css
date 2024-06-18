@@ -7,12 +7,13 @@
 /* Styling for div that contains search bar, edit button, and results */
 .search {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
 }
 
-.search-top-row {
+.search-section {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
 }
@@ -54,19 +55,8 @@
   cursor: pointer;
 }
 
-/* Styling for edit button */
-.edit-icon {
-  width: 30px;
-  height: 30px;
-}
-
-.edit-icon:hover {
-  cursor: pointer;
-}
-
 /* Centers search results div box */
 .search-results {
-  margin: 0 15px;
   font-family: roboto-medium;
 }
 
@@ -106,6 +96,18 @@
   text-decoration: underline;
 }
 
+/* Styling for edit button */
+.edit-icon {
+  width: 30px;
+  height: 30px;
+  margin-top: 45px;
+}
+
+.edit-icon:hover {
+  cursor: pointer;
+}
+
+/* Styling for current location header */
 .current-location {
   text-align: center;
   font-size: 18px;
@@ -118,13 +120,29 @@
   flex-direction: column;
 }
 
+/* Styling for city link */
+.list-link {
+  color: white;
+  text-decoration: none;
+  display: contents;
+}
+
+/* Adjusts link and city div width */
+.list-link .city-div, .city-div-small:not(:first-child) {
+  width: 95%;
+}
+
+.list-link-small .city-div, .city-div-small:not(:first-child){
+  width: 85%;
+  margin: 0 auto;
+}
+
 /* Styling for city list component for when it is big and small */
 .city-div, .city-div-small:not(:first-child) {
   display: flex;
   flex-direction: row;
   align-items: center;
   margin: 0 auto 10px;
-  width: 320px;
   height: 100px;
   background-color: var(--box);
   font-size: 25px;
@@ -134,7 +152,6 @@
 /* Shrinks elements in city list component for when arrows are visible */
 .city-div-small {
   margin: 0 auto;
-  width: 290px;
   height: 80px;
   font-size: 19px;
 }

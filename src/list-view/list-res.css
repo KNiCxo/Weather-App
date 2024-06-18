@@ -1,0 +1,147 @@
+@media only screen and (min-width: 600px) {
+  /* Adjusts link and city div width */
+  .list-link .city-div, .city-div-small:not(:first-child) {
+    width: 65%;
+  }
+
+  .list-link-small .city-div, .city-div-small:not(:first-child){
+    width: 55%;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  /* Styling for search bar */
+  .search-bar {
+    margin: 40px 15px;
+    width: 500px;
+    border-radius: 30px;
+  }
+
+  /* Styling for search bar input field */
+  .search input {
+    border-radius: 30px;
+    width: 400px;
+    height: 35px;
+    font-size: 25px;
+  }
+
+  /* Styling for magnifying glass button */
+  .search-icon {
+    width: 35px;
+    height: 35px;
+    top: 12px;
+  }
+
+  /* Styling for search results ul */
+  .search-results ul {
+    margin: -28px 0 20px;
+    width: 495px;
+  }
+
+  /* Styling for search results li */
+  .search-results li {
+    padding: 19px;
+    font-size: 17px;
+  }
+
+  /* Styling for search results "Add" button */
+  .add-button {
+    font-size: 16px;
+  }
+
+  /* Styling for edit button */
+  .edit-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* Styling for current location header */
+  .current-location {
+    font-size: 35px;
+  }
+
+  /* Styling for city list component for when it is big and small */
+  .city-div, .city-div-small:not(:first-child) {
+    margin: 0 auto 15px;
+    height: 135px;
+    font-size: 35px;
+    border-radius: 30px;
+  }
+
+  /* Shrinks elements in city list component for when arrows are visible */
+  .city-div-small {
+    height: 125px;
+    font-size: 29px;
+  }
+
+  /* Styling for city weather condition image */
+  .city-image {
+    width: 85px;
+    height: 85px;
+  }
+
+  /* Shrinks size of city weather condition image when arrows are visible */
+  .city-div-small:first-child .city-image-small{
+    width: 70px;
+    height: 70px;
+  }
+
+  /* Styling for city current temperature for when it is big and small */
+  .city-current {
+    font-size: 65px;
+    margin: 5px auto -28px 15px;
+  }
+
+  /* Shrinks size of current temperature font when arrows are visible */
+  .city-div-small:first-child .city-current-small {
+    font-size: 43px;
+    margin: 5px auto -22px 15px;
+  }
+
+  /* Styling for the city's high and low temperatures */
+  .city-high-low {
+    font-size: 20px;
+  }
+
+  /* Shrinks size of high and low temperature font when arrows are visible */
+  .city-div-small:first-child .city-high-low-small {
+    font-size: 15px;
+    margin-bottom: -10px;
+  }
+
+  /* Styling for movement arrow div box */
+  .arrow-div {
+    width: 225px;
+    height: 45px;
+    border-radius: 20px;
+  }
+
+  /* Styling for both arrows */
+  .arrow-div img {
+    width: 35px;
+    height: 35px;
+  }
+
+  /* Styling for remove button */
+  .remove {
+    width: 40px;
+    height: 40px;
+    top: 5px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  /* Adjusts link and city div width */
+  .list-link .city-div, .city-div-small:not(:first-child) {
+    width: 45%;
+  }
+
+  .list-link-small .city-div, .city-div-small:not(:first-child){
+    width: 40%;
+  }
+
+  /* Styling for city list component for when it is big and small */
+  .city-div, .city-div-small:not(:first-child) {
+    margin: 0 auto 20px;
+  }
+}

@@ -79,28 +79,29 @@ function Search(props) {
       {/* Container for search bar, magnifying glass image, and search results */}
       <div className='search'>
         {/* Get access to input field using ref */}
-        <div className='search-top-row'>
+        <div className='search-section'>
           <div className='search-bar'>
             <input ref={inputRef} onBlur={() => setLocationList(null)} type="text" placeholder='Search City'/>
             <img className='search-icon' onClick={getLocations} src="search.png" alt=""/>
           </div>
-          <img className='edit-icon' onClick={props.enableEdits} src="edit.png" alt="" />
+
+          {/* Displays array if it exist s*/}
+          {locationList && (
+            <div className='search-results'>
+              <ul>
+                {/* Loop through to display all results */}
+                {locationList.map((city, index) => (
+                  <li key={index}>
+                    {/* Displays city name, state, and country, along with an "Add" button */}
+                    {city.name}, {city.state} {city.country} <span className='add-button' onMouseDown={() => addLocation(index)}>Add</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
 
-        {/* Displays array if it exist s*/}
-        {locationList && (
-          <div className='search-results'>
-            <ul>
-              {/* Loop through to display all results */}
-              {locationList.map((city, index) => (
-                <li key={index}>
-                  {/* Displays city name, state, and country, along with an "Add" button */}
-                  {city.name}, {city.state} {city.country} <span className='add-button' onMouseDown={() => addLocation(index)}>Add</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        <img className='edit-icon' onClick={props.enableEdits} src="edit.png" alt="" />
       </div>
     </>
     
