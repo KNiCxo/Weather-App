@@ -6,6 +6,7 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import MainView from './main-view/MainView.jsx'
 import ListView from './list-view/ListView.jsx';
 
+// Import global styling
 import './index.css';
 
 const router = createBrowserRouter([

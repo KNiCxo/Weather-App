@@ -57,7 +57,8 @@
 
   /* Styling for current location header */
   .current-location {
-    font-size: 35px;
+    font-size: 40px;
+    margin-bottom: 30px;
   }
 
   /* Styling for city list component for when it is big and small */
@@ -133,11 +134,11 @@
 @media only screen and (min-width: 1200px) {
   /* Adjusts link and city div width */
   .list-link .city-div, .city-div-small:not(:first-child) {
-    width: 45%;
+    width: 40%;
   }
 
   .list-link-small .city-div, .city-div-small:not(:first-child){
-    width: 40%;
+    width: 35%;
   }
 
   /* Styling for city list component for when it is big and small */

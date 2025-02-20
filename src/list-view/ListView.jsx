@@ -80,7 +80,7 @@ function ListView() {
   function enableEdits() {
     // Unlocks/locks input field to allow/prevent editing
     const inputField = document.querySelector('.search input');
-    console.log(inputField.disabled);
+    
     if (!inputField.disabled) {
       inputField.disabled = true;
       inputField.style.color = 'rgb(240, 231, 231)';

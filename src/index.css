@@ -1,7 +1,7 @@
 /* Variables used throughout the various stylesheets */
 :root {
   /* Used for div container components */
-  --box: rgba(123, 176, 226, 0.704);
+  --box: rgba(85, 131, 174, 0.704);
 
   /* Used for the lines that divide the div containers */
   --boxBorder: rgba(163, 208, 218, 0.821);
@@ -24,6 +24,7 @@ body {
   color: white;
 }
 
+/* Styling for different widths */
 @media only screen and (min-width: 800px) {
   /* Styling for body */
   body {
@@ -32,7 +33,6 @@ body {
     background-position-y: 0px;
   }
 } 
-
 
 @media only screen and (min-width: 1100px) {
   /* Styling for body */

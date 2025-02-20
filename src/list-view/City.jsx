@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 // Displays the weather data of a city based on the latitude and longitude values passed to it
 function City(props) {

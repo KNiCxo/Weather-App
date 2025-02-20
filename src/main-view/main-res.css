@@ -123,7 +123,7 @@
 @media only screen and (min-width: 1080px) {
   /* Styling for daily summary and 24 hour forecast box */
   .twenty-four-hour {
-    width: 50%;
+    width: 45%;
   }
 
   /* Styling for daily summary */
@@ -143,6 +143,6 @@
 
   /* Styling for 7 day forecast */
   .seven-day {
-    width: 50%;
+    width: 45%;
   }
 }
